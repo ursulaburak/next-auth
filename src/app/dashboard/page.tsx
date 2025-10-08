@@ -1,14 +1,26 @@
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
-import { authOptions } from '@/lib/auth';
-import { DashboardContent } from '@/components/dashboard/DashboardContent';
+"use client";
 
-export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
+import { useSession } from "next-auth/react";
 
-  if (!session) {
-    redirect('/auth/signin');
+export default function DashboardPage() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <p className="text-center mt-20">Loading...</p>;
   }
 
-  return <DashboardContent user={session.user} />;
+  if (!session) {
+    return <p className="text-center mt-20">You must be signed in to view this page.</p>;
+  }
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold mb-4">
+          Welcome to your Dashboard 🎉
+        </h1>
+        <p className="text-lg">Hello, {session.user?.name || "User"}!</p>
+      </div>
+    </div>
+  );
 }
