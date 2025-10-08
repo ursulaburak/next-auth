@@ -3,9 +3,9 @@ import Auth0Provider from "next-auth/providers/auth0";
 
 // Use proper environment variable names
 if (
-  !process.env.HrW9ZowUDa7XpmP3003vEycbM1MWIyOo ||
-  !process.env.Bad2Zd3uRe-R3DowVN-ALIZtJ7F5EFLiEFnItplB9Ct1heORu88APRDEg_qqm8iY ||
-  !process.env.dev-ue2evpin1ifzgppy.us.auth0.com
+  !process.env.AUTH0_CLIENT_ID ||
+  !process.env.AUTH0_CLIENT_SECRET ||
+  !process.env.AUTH0_ISSUER
 ) {
   throw new Error("Missing Auth0 environment variables");
 }
@@ -13,9 +13,9 @@ if (
 export const authOptions: NextAuthOptions = {
   providers: [
     Auth0Provider({
-      clientId: process.env.HrW9ZowUDa7XpmP3003vEycbM1MWIyOo,
-      clientSecret: process.env.Bad2Zd3uRe-R3DowVN-ALIZtJ7F5EFLiEFnItplB9Ct1heORu88APRDEg_qqm8iY,
-      issuer: process.env.dev-ue2evpin1ifzgppy.us.auth0.com,
+      clientId: process.env.AUTH0_CLIENT_ID,
+      clientSecret: process.env.AUTH0_CLIENT_SECRET,
+      issuer: process.env.AUTH0_ISSUER,
     }),
   ],
   session: {
