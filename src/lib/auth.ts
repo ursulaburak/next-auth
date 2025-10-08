@@ -1,10 +1,11 @@
 import { NextAuthOptions } from "next-auth";
 import Auth0Provider from "next-auth/providers/auth0";
 
+// Use proper environment variable names
 if (
-  !process.env.arCLwOuQkjqTV1YjsGFhy0KapROGMxsj ||
-  !process.env['fmx8AaPpw1Qz-F5NK1H78b9rZ8yz6wZdtfsjxNqVBWqMMj91ugvaHkKLxUsPmvbi'] ||
-  !process.env['dev-ue2evpin1ifzgppy.us.auth0.com']
+  !process.env.HrW9ZowUDa7XpmP3003vEycbM1MWIyOo ||
+  !process.env.Bad2Zd3uRe-R3DowVN-ALIZtJ7F5EFLiEFnItplB9Ct1heORu88APRDEg_qqm8iY ||
+  !process.env.dev-ue2evpin1ifzgppy.us.auth0.com
 ) {
   throw new Error("Missing Auth0 environment variables");
 }
@@ -12,9 +13,9 @@ if (
 export const authOptions: NextAuthOptions = {
   providers: [
     Auth0Provider({
-      clientId: process.env.arCLwOuQkjqTV1YjsGFhy0KapROGMxsj,
-      clientSecret: process.env['fmx8AaPpw1Qz-F5NK1H78b9rZ8yz6wZdtfsjxNqVBWqMMj91ugvaHkKLxUsPmvbi'],
-      issuer: process.env['dev-ue2evpin1ifzgppy.us.auth0.com'],
+      clientId: process.env.HrW9ZowUDa7XpmP3003vEycbM1MWIyOo,
+      clientSecret: process.env.Bad2Zd3uRe-R3DowVN-ALIZtJ7F5EFLiEFnItplB9Ct1heORu88APRDEg_qqm8iY,
+      issuer: process.env.dev-ue2evpin1ifzgppy.us.auth0.com,
     }),
   ],
   session: {
@@ -28,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken;
+      session.accessToken = token.accessToken as string;
       session.user.id = token.sub!; 
       return session;
     },
