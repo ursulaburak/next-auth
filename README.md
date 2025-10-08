@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Next.js + NextAuth + Auth0 Authentication System
 
-## Getting Started
+This project implements an authentication and authorization system using Next.js (App Router), NextAuth.js, and Auth0, following SOLID principles and 12-Factor App methodology.
 
-First, run the development server:
+Users can log in via Auth0 OAuth, sessions are handled via JWT, and pages are protected with middleware.
+It also includes role-based access control (RBAC) and Playwright E2E tests for authentication flows.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🛡 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+*Next.js 14+ (App Router)
+*Auth0 OAuth integration via NextAuth
+*JWT-based session handling
+*Role-based access control (RBAC)
+*Middleware-protected routes
+*TypeScript for type safety
+*TailwindCSS (UI styling)
+*12-Factor compliance via .env configuration
+*Playwright E2E tests for login flows
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+📂 Branching Strategy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+dev/v1.0.0 → development branch
 
-## Learn More
+prod/v1.0.0 → production branch
 
-To learn more about Next.js, take a look at the following resources:
+⚙️ Installation
+1. Clone the Repo (git clone https://github.com/ursulaburak/next-auth.git)
+2. Install Dependencies (npm install)
+3. Setup Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a .env.local file in the root:
+  AUTH0_CLIENT_ID=your_auth0_client_id
+  AUTH0_CLIENT_SECRET=your_auth0_client_secret
+  AUTH0_ISSUER_BASE_URL=https://your-tenant.auth0.com
+  NEXTAUTH_SECRET=your_random_secret
+  NEXTAUTH_URL=http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Testing with Playwright
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project includes end-to-end (E2E) tests for authentication.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm install -D @playwright/test
+npx playwright install
+
+Add Test Script (package.json)
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "test:e2e": "playwright test"
+}
+
+
